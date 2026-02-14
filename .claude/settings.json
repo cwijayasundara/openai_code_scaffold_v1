@@ -1,0 +1,42 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/pre_write_check.sh\" \"$CLAUDE_FILE_PATH\"",
+            "timeout": 30,
+            "statusMessage": "Checking write location..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/post_write_lint.sh\" \"$CLAUDE_FILE_PATH\"",
+            "timeout": 120,
+            "statusMessage": "Running post-write linters..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/lint_all.sh\"",
+            "timeout": 120,
+            "statusMessage": "Running final lint check..."
+          }
+        ]
+      }
+    ]
+  }
+}
