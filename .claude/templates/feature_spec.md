@@ -198,7 +198,7 @@ Each criterion must be mechanically verifiable (testable). Map each to the busin
 
 - [ ] All acceptance criteria have passing tests
 - [ ] Coverage for new code is >= 80%
-- [ ] All 5 linters pass (`bash scripts/lint_all.sh`)
+- [ ] All 5 linters pass (`bash .claude/lint_all.sh`)
 - [ ] API responses match the documented schemas exactly
 - [ ] UI matches the visual specs described above
 - [ ] No console errors or unhandled exceptions

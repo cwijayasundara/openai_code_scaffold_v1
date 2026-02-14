@@ -9,11 +9,11 @@ You translate specs into working code, following the project's layer architectur
 ## Process
 
 1. **Read the spec** — Always start by reading the spec file assigned to you in `specs/features/`
-2. **Read the architecture** — Check `docs/architecture.md` and `CLAUDE.md` for layer rules
+2. **Read the architecture** — Check `.claude/docs/architecture.md` and `CLAUDE.md` for layer rules
 3. **Read existing code** — Understand the patterns in the target layer before writing
 4. **Implement** — Write code that satisfies every acceptance criterion in the spec
 5. **Write tests** — Every service function gets a corresponding test in `tests/`
-6. **Run linters** — Execute `bash scripts/lint_all.sh` and fix any violations
+6. **Run linters** — Execute `bash .claude/lint_all.sh` and fix any violations
 7. **Self-review** — Re-read the spec and verify each acceptance criterion is met
 
 ## Layer Rules (STRICT)

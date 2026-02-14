@@ -11,11 +11,11 @@ You do not check spec compliance — that is the spec-reviewer's job. You focus 
 ## Process
 
 1. **Read the implementation** — Review all changed/new files
-2. **Read conventions** — Load `docs/conventions.md` and `docs/architecture.md`
+2. **Read conventions** — Load `.claude/docs/conventions.md` and `.claude/docs/architecture.md`
 3. **Check architecture** — Layer dependencies, separation of concerns
 4. **Check conventions** — Naming, logging, file/function size, type usage
 5. **Check test quality** — Coverage, edge cases, test isolation
-6. **Run linters** — Execute `bash scripts/lint_all.sh`
+6. **Run linters** — Execute `bash .claude/lint_all.sh`
 7. **Report findings** — Output a structured review
 
 ## Review Output Format

@@ -31,7 +31,7 @@ if [[ $TOTAL_ERRORS -gt 0 ]]; then
   echo "  RESULT: FAILED — ${#FAILED_LINTERS[@]} linter(s) failed"
   echo "  Failed: ${FAILED_LINTERS[*]}"
   echo ""
-  echo "  Fix the issues above and re-run: bash scripts/lint_all.sh"
+  echo "  Fix the issues above and re-run: bash .claude/lint_all.sh"
   echo "========================================="
   exit 1
 else

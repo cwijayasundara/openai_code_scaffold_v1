@@ -32,8 +32,8 @@ Before writing anything, conduct a focused interview. Ask questions in small bat
 ### Phase 2: Research and Draft
 
 1. Read existing specs in `specs/features/` to avoid conflicts
-2. Read `docs/architecture.md` to understand the layer model
-3. Use `specs/templates/feature_spec.md` as the template
+2. Read `.claude/docs/architecture.md` to understand the layer model
+3. Use `.claude/templates/feature_spec.md` as the template
 4. Fill in every section based on the interview answers
 5. Flag any gaps as **Open Questions** — do not invent requirements
 6. Present the draft to the human section by section for approval:

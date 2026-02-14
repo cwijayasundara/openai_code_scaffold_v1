@@ -8,7 +8,7 @@ set -uo pipefail
 
 FILE_PATH="${1:-}"
 PROJECT_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-LINTERS_DIR="$PROJECT_ROOT/scripts/linters"
+LINTERS_DIR="$PROJECT_ROOT/.claude/linters"
 
 if [[ -z "$FILE_PATH" ]]; then
   exit 0

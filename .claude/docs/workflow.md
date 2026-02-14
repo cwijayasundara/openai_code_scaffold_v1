@@ -12,9 +12,9 @@ You are a **harness engineer**, not a coder. Your job is to design the environme
 
 ### What You Do
 
-1. **Write specs** — Collaborate with the spec-writer agent or fill in `specs/templates/feature_spec.md` manually.
+1. **Write specs** — Collaborate with the spec-writer agent or fill in `.claude/templates/feature_spec.md` manually.
 2. **Approve plans** — Review execution plans before implementation begins.
-3. **Review output** — Read the agent's code, run `bash scripts/lint_all.sh`, run `make test`.
+3. **Review output** — Read the agent's code, run `bash .claude/lint_all.sh`, run `make test`.
 4. **Evolve the harness** — When agents make mistakes, fix the harness: linter rules, agent instructions, spec templates.
 
 ### What You Never Do
@@ -47,7 +47,7 @@ The spec-writer agent interviews you to draw out requirements, then drafts the s
 # Claude Code: "Use the spec-writer agent to brainstorm a spec for [rough idea]"
 
 # Option B: Manual
-cp specs/templates/feature_spec.md specs/features/my_feature.md
+cp .claude/templates/feature_spec.md specs/features/my_feature.md
 ```
 
 Output: `specs/features/<name>.md`
@@ -114,9 +114,9 @@ Run periodically to prevent technical debt accumulation.
 
 | You notice... | You fix... | By... |
 |---|---|---|
-| Agent violates a convention | Linter rules | Adding a check to `scripts/linters/` |
+| Agent violates a convention | Linter rules | Adding a check to `.claude/linters/` |
 | Agent misunderstands architecture | Agent instructions | Updating `.claude/agents/*.md` |
-| Spec was ambiguous | Spec template | Adding a section to `specs/templates/feature_spec.md` |
+| Spec was ambiguous | Spec template | Adding a section to `.claude/templates/feature_spec.md` |
 | Reviewer catches a pattern | CLAUDE.md or conventions | Encoding the pattern in docs |
 
 **Never fix code directly. Fix the harness that prevents the class of error from recurring.**

@@ -9,7 +9,7 @@ A minimal, spec-driven harness for building software with Claude Code agents.
 
 - **CLAUDE.md** — Concise map pointing to detailed docs
 - **3 hooks** — Pre-write checks, post-write linting, spec enforcement
-- **5 agents** — Specialized sub-agents for specs, implementation, testing, review, and refactoring
+- **6 agents** — Specialized sub-agents for specs, implementation, testing, review, and refactoring
 - **5 custom linters** — Layer deps, naming, file size, logging, spec coverage
 - **Spec templates** — Feature spec, design doc, execution plan
 - **Infrastructure** — Makefile, Dockerfile, pyproject.toml pre-configured
@@ -26,12 +26,12 @@ A minimal, spec-driven harness for building software with Claude Code agents.
 
 You are a **harness engineer**. You write zero lines of application code. Your job:
 
-1. **Write specs** — Fill in `specs/templates/feature_spec.md` with data models, API contracts, UI layout, acceptance criteria
-2. **Orchestrate agents** — Tell Claude Code which agent to use and which spec to implement
+1. **Write specs** — Collaborate with the spec-writer agent or fill in `.claude/templates/feature_spec.md`
+2. **Approve plans** — Review execution plans before implementation begins
 3. **Review output** — Run linters, run tests, check acceptance criteria
 4. **Evolve the harness** — When agents make mistakes, fix linter rules / agent instructions / spec templates — not code
 
-See [docs/workflow.md](docs/workflow.md) for the full orchestration guide.
+See [.claude/docs/workflow.md](.claude/docs/workflow.md) for the full orchestration guide.
 
 ## Workflow
 
@@ -50,41 +50,32 @@ cd my-project
 pip install -r requirements-dev.txt
 
 # 3. Write a feature spec
-cp specs/templates/feature_spec.md specs/features/my-feature.md
+cp .claude/templates/feature_spec.md specs/features/my-feature.md
 
 # 4. Implement via Claude Code agents
 # Use the implementer agent to generate code from specs
 
 # 5. Run linters and tests
-bash scripts/lint_all.sh
+bash .claude/lint_all.sh
 make test
 ```
 
 ## Project Structure
 
 ```
-.claude/
-  agents/         # 5 sub-agents (spec-writer, implementer, test-writer, reviewer, refactorer)
-  settings.json   # Hook wiring + permissions
-scripts/
-  hooks/          # 3 automated hooks
-  linters/        # 5 custom linter scripts
-  lint_all.sh     # Master linter runner
+.claude/                # All framework scaffolding
+  agents/               # 6 sub-agents
+  docs/                 # Framework docs (workflow, architecture, conventions)
+  hooks/                # 3 automated hooks
+  linters/              # 5 custom linter scripts
+  templates/            # feature_spec.md, design_doc.md, execution_plan.md
+  lint_all.sh           # Master linter runner
+  settings.json         # Hook wiring + permissions
 specs/
-  templates/      # feature_spec.md, design_doc.md, execution_plan.md
-  features/       # Feature specs (source of truth)
-docs/
-  architecture.md # Layer model, intentional constraints, testing strategy
-  workflow.md     # Full SDSL workflow guide
-  conventions.md  # Coding standards and type conventions
+  features/             # Feature specs (project content, source of truth)
 src/
-  types/          # Shared types and schemas
-  config/         # Configuration
-  repo/           # Data access layer
-  service/        # Business logic
-  runtime/        # Server bootstrap
-  ui/             # Presentation layer
-tests/            # Mirrors src/ structure
+  types/ config/ repo/ service/ runtime/ ui/
+tests/                  # Mirrors src/ structure
 ```
 
 ## Agents
@@ -100,7 +91,7 @@ tests/            # Mirrors src/ structure
 
 ## Custom Linters
 
-Run all linters: `bash scripts/lint_all.sh`
+Run all linters: `bash .claude/lint_all.sh`
 
 | Linter | Enforces |
 |--------|----------|

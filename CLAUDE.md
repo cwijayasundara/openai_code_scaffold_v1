@@ -14,7 +14,7 @@ This project uses **Spec-Driven Software Lifecycle (SDSL)** — specifications, 
 Types → Config → Repo → Service → Runtime → UI
 ```
 
-Code may only depend **forward** through layers. Backward dependencies are forbidden and enforced by `scripts/linters/layer_deps.sh`.
+Code may only depend **forward** through layers. Backward dependencies are forbidden and enforced by `.claude/linters/layer_deps.sh`.
 
 | Layer     | Path              | Purpose                                      |
 |-----------|-------------------|-----------------------------------------------|
@@ -31,14 +31,14 @@ Code may only depend **forward** through layers. Backward dependencies are forbi
 SPEC (collaborative) → PLAN (agent) → APPROVE (human) → IMPLEMENT (agent) → SPEC REVIEW (agent) → CODE REVIEW (agent)
 ```
 
-1. **Write a spec** — collaborate with the spec-writer agent (Socratic interview) or use `specs/templates/feature_spec.md`
+1. **Write a spec** — collaborate with the spec-writer agent (Socratic interview) or use `.claude/templates/feature_spec.md`
 2. **Plan** — agent writes execution plan with 2-5 minute tasks, exact file paths, and verification steps
 3. **Approve** — **human reviews and approves the plan before any code is written**
 4. **Implement** — execute tasks using Claude Code agents
 5. **Spec review** — spec-reviewer validates implementation against the spec
 6. **Code review** — code-reviewer validates code quality and conventions
 
-See `docs/workflow.md` for the full workflow guide.
+See `.claude/docs/workflow.md` for the full workflow guide.
 
 ## Conventions
 
@@ -49,24 +49,29 @@ See `docs/workflow.md` for the full workflow guide.
 - **Types**: Refined Pydantic types for domain concepts — no raw `str`/`int` for IDs, emails, etc.
 - **Tests**: Every service function needs a test in `tests/` mirroring `src/`. Coverage minimum: 80%.
 - **No manual code**: All code is agent-generated from specs. Humans write specs and review.
-- **Git workflow**: Feature branches per spec, merge after both reviews pass. See `docs/git-workflow.md`.
+- **Git workflow**: Feature branches per spec, merge after both reviews pass. See `.claude/docs/git-workflow.md`.
 
-Details: [docs/conventions.md](docs/conventions.md)
+Details: [.claude/docs/conventions.md](.claude/docs/conventions.md)
 
-## Key Files
+## Scaffolding Structure
 
-| File | Purpose |
+All framework files live in `.claude/`. The project root stays clean for application code.
+
+| Path | Purpose |
 |------|---------|
-| `specs/` | Feature specifications (source of truth for intent) |
-| `docs/workflow.md` | Full SDSL workflow guide |
-| `docs/architecture.md` | Detailed architecture reference |
-| `docs/conventions.md` | Coding standards and type conventions |
-| `docs/git-workflow.md` | Git branching and merge workflow |
-| `scripts/linters/` | Custom linters enforcing invariants |
-| `.claude/agents/` | Sub-agent definitions for specialized tasks |
-| `.claude/settings.json` | Hook configurations and permissions |
+| `.claude/agents/` | Sub-agent definitions |
+| `.claude/docs/` | Framework documentation (workflow, architecture, conventions) |
+| `.claude/templates/` | Spec and plan templates |
+| `.claude/linters/` | Custom linters enforcing invariants |
+| `.claude/hooks/` | Pre/post write hooks |
+| `.claude/lint_all.sh` | Master linter runner |
+| `specs/features/` | Feature specifications (project content) |
+| `src/` | Application code |
+| `tests/` | Tests |
 
 ## Linter Rules (enforced via hooks)
+
+Run all: `bash .claude/lint_all.sh`
 
 All linter error messages include **remediation instructions** so agents can self-correct.
 
@@ -100,8 +105,7 @@ Both must pass before a feature is considered complete.
 - Before implementing anything, **read the relevant spec** in `specs/`
 - Before modifying a file, **read it first**
 - **Plan approval is mandatory** — write the execution plan, wait for human approval, then implement
-- After writing code, **run the linters**: `bash scripts/lint_all.sh`
+- After writing code, **run the linters**: `bash .claude/lint_all.sh`
 - When a linter fails, read the error message — it contains the fix
 - Keep PRs small and focused on a single spec item
-- Update `docs/` when behavior changes
 - Humans write zero application code — they write specs, review, and evolve the harness

@@ -25,7 +25,7 @@ format: ## Auto-fix lint issues
 	ruff format src/ tests/
 
 lint-custom: ## Run 5 custom linters
-	bash scripts/lint_all.sh
+	bash .claude/lint_all.sh
 
 # ---- Tests ----
 
@@ -44,4 +44,4 @@ ci: lint lint-custom test ## Full CI: lint + custom linters + tests
 # ---- Validate ----
 
 validate: ## Run all custom linters
-	bash scripts/lint_all.sh
+	bash .claude/lint_all.sh

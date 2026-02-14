@@ -3,7 +3,7 @@
 # Enforces: Every service module must trace to a spec file.
 #
 # REMEDIATION: Create a spec in specs/features/ before implementing.
-# Use the template at specs/templates/feature_spec.md.
+# Use the template at .claude/templates/feature_spec.md.
 # Add a "# Spec: specs/features/<name>.md" comment at the top of the module.
 
 set -euo pipefail
@@ -39,7 +39,7 @@ while IFS= read -r -d '' file; do
     echo "  REMEDIATION: Add a spec reference comment in the first 5 lines:"
     echo "    # Spec: specs/features/<feature-name>.md"
     echo "  Then create the spec file using the template:"
-    echo "    cp specs/templates/feature_spec.md specs/features/<feature-name>.md"
+    echo "    cp .claude/templates/feature_spec.md specs/features/<feature-name>.md"
     echo ""
     ERRORS=$((ERRORS + 1))
     continue
@@ -51,7 +51,7 @@ while IFS= read -r -d '' file; do
     echo "ERROR: Referenced spec not found for $rel_path"
     echo "  Referenced: $spec_ref"
     echo "  REMEDIATION: Create the spec file at $spec_ref"
-    echo "    cp specs/templates/feature_spec.md $spec_ref"
+    echo "    cp .claude/templates/feature_spec.md $spec_ref"
     echo ""
     ERRORS=$((ERRORS + 1))
   fi

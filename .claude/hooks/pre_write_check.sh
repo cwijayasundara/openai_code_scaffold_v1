@@ -17,7 +17,7 @@ fi
 REL_PATH="${FILE_PATH#$PROJECT_ROOT/}"
 
 # Rule 1: Prevent writing outside recognized directories
-VALID_DIRS=("src/" "tests/" "specs/" "docs/" "scripts/" ".claude/")
+VALID_DIRS=("src/" "tests/" "specs/" ".claude/")
 VALID=false
 for dir in "${VALID_DIRS[@]}"; do
   if [[ "$REL_PATH" == "$dir"* ]]; then
@@ -41,7 +41,7 @@ fi
 if [[ "$REL_PATH" == "src/service/"* ]] && [[ ! -f "$FILE_PATH" ]]; then
   echo "NOTE: Creating new service file $REL_PATH"
   echo "REMINDER: Add '# Spec: specs/features/<name>.md' in the first 5 lines."
-  echo "Create the spec first using: cp specs/templates/feature_spec.md specs/features/<name>.md"
+  echo "Create the spec first using: cp .claude/templates/feature_spec.md specs/features/<name>.md"
 fi
 
 exit 0
