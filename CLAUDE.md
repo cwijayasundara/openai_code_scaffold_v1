@@ -1,6 +1,7 @@
 # SDSL Project — Claude Code Harness
 
-> **Philosophy**: Humans steer. Agents execute.
+> **Philosophy**: Humans are harness engineers. Agents write all code. Specs are the source of truth.
+> Ref: [OpenAI — Harness Engineering](https://openai.com/index/harness-engineering/)
 > This file is a map, not a manual. Follow pointers to deeper sources of truth.
 
 ## Architecture
@@ -76,3 +77,4 @@ All linter error messages include **remediation instructions** so agents can sel
 - When a linter fails, read the error message — it contains the fix
 - Keep PRs small and focused on a single spec item
 - Update `docs/` when behavior changes
+- Humans write zero application code — they write specs, review, and evolve the harness

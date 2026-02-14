@@ -20,13 +20,24 @@ A minimal, spec-driven harness for building software with Claude Code agents.
 - **Layer Architecture**: Types → Config → Repo → Service → Runtime → UI
 - **Coverage**: Mechanically enforced at 80% minimum
 
+## Your Role: Harness Engineer
+
+> Inspired by [OpenAI — Harness Engineering](https://openai.com/index/harness-engineering/)
+
+You are a **harness engineer**. You write zero lines of application code. Your job:
+
+1. **Write specs** — Fill in `specs/templates/feature_spec.md` with data models, API contracts, UI layout, acceptance criteria
+2. **Orchestrate agents** — Tell Claude Code which agent to use and which spec to implement
+3. **Review output** — Run linters, run tests, check acceptance criteria
+4. **Evolve the harness** — When agents make mistakes, fix linter rules / agent instructions / spec templates — not code
+
+See [docs/workflow.md](docs/workflow.md) for the full orchestration guide.
+
 ## Workflow
 
 ```
 SPEC (human) → DESIGN (agent) → PLAN (agent) → IMPLEMENT (agent) → REVIEW (agent)
 ```
-
-See [docs/workflow.md](docs/workflow.md) for the full workflow guide.
 
 ## Quickstart
 
