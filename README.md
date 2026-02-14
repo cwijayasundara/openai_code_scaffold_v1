@@ -36,7 +36,7 @@ See [docs/workflow.md](docs/workflow.md) for the full orchestration guide.
 ## Workflow
 
 ```
-SPEC (human) → DESIGN (agent) → PLAN (agent) → IMPLEMENT (agent) → REVIEW (agent)
+SPEC (collaborative) → PLAN (agent) → APPROVE (human) → IMPLEMENT (agent) → SPEC REVIEW + CODE REVIEW (agent)
 ```
 
 ## Quickstart
@@ -91,10 +91,11 @@ tests/            # Mirrors src/ structure
 
 | Agent | Role |
 |-------|------|
-| `spec-writer` | Intent → structured specs |
+| `spec-writer` | Brainstorming interviewer: collaborates with human to produce specs |
 | `implementer` | Spec-driven code with layer rules |
 | `test-writer` | Test generation and coverage |
-| `reviewer` | Spec compliance and quality review |
+| `spec-reviewer` | Validates implementation against spec (spec compliance) |
+| `code-reviewer` | Validates code quality and conventions |
 | `refactorer` | Continuous debt reduction |
 
 ## Custom Linters

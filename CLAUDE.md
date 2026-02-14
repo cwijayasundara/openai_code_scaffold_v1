@@ -25,13 +25,18 @@ Code may only depend **forward** through layers. Backward dependencies are forbi
 | Runtime   | `src/runtime/`    | Server bootstrap, middleware, lifecycle       |
 | UI        | `src/ui/`         | Presentation, CLI output, user-facing layer   |
 
-## Workflow: Spec → Design → Plan → Implement → Review
+## Workflow: Spec → Plan → Approve → Implement → Review
 
-1. **Write a spec** — use `specs/templates/feature_spec.md` as a starting point
-2. **Design** — produce a design doc in `docs/designs/` referencing the spec
-3. **Plan** — break the design into implementation tasks
+```
+SPEC (collaborative) → PLAN (agent) → APPROVE (human) → IMPLEMENT (agent) → SPEC REVIEW (agent) → CODE REVIEW (agent)
+```
+
+1. **Write a spec** — collaborate with the spec-writer agent (Socratic interview) or use `specs/templates/feature_spec.md`
+2. **Plan** — agent writes execution plan with 2-5 minute tasks, exact file paths, and verification steps
+3. **Approve** — **human reviews and approves the plan before any code is written**
 4. **Implement** — execute tasks using Claude Code agents
-5. **Review** — validate against the spec, run linters and tests
+5. **Spec review** — spec-reviewer validates implementation against the spec
+6. **Code review** — code-reviewer validates code quality and conventions
 
 See `docs/workflow.md` for the full workflow guide.
 
@@ -44,6 +49,7 @@ See `docs/workflow.md` for the full workflow guide.
 - **Types**: Refined Pydantic types for domain concepts — no raw `str`/`int` for IDs, emails, etc.
 - **Tests**: Every service function needs a test in `tests/` mirroring `src/`. Coverage minimum: 80%.
 - **No manual code**: All code is agent-generated from specs. Humans write specs and review.
+- **Git workflow**: Feature branches per spec, merge after both reviews pass. See `docs/git-workflow.md`.
 
 Details: [docs/conventions.md](docs/conventions.md)
 
@@ -55,6 +61,7 @@ Details: [docs/conventions.md](docs/conventions.md)
 | `docs/workflow.md` | Full SDSL workflow guide |
 | `docs/architecture.md` | Detailed architecture reference |
 | `docs/conventions.md` | Coding standards and type conventions |
+| `docs/git-workflow.md` | Git branching and merge workflow |
 | `scripts/linters/` | Custom linters enforcing invariants |
 | `.claude/agents/` | Sub-agent definitions for specialized tasks |
 | `.claude/settings.json` | Hook configurations and permissions |
@@ -69,10 +76,30 @@ All linter error messages include **remediation instructions** so agents can sel
 - `file_size.sh` — max file/function size limits
 - `spec_coverage.sh` — every implementation must trace to a spec
 
+## Agents (6)
+
+| Agent | Role |
+|-------|------|
+| `spec-writer` | Brainstorming interviewer: collaborates with human to produce specs through Socratic dialogue |
+| `implementer` | Writes code satisfying specs, layer by layer |
+| `test-writer` | Creates tests derived from spec acceptance criteria |
+| `spec-reviewer` | Validates implementation against spec (did we build what the spec says?) |
+| `code-reviewer` | Validates code quality and conventions (is the code well-written?) |
+| `refactorer` | Prevents technical debt accumulation |
+
+### Two-Stage Review
+
+Review is split into two independent passes:
+1. **Spec review** (spec-reviewer) — checks spec compliance: acceptance criteria, business rules, edge cases, data model, API contracts
+2. **Code review** (code-reviewer) — checks code quality: architecture, conventions, test quality, linter compliance
+
+Both must pass before a feature is considered complete.
+
 ## Agent Instructions
 
 - Before implementing anything, **read the relevant spec** in `specs/`
 - Before modifying a file, **read it first**
+- **Plan approval is mandatory** — write the execution plan, wait for human approval, then implement
 - After writing code, **run the linters**: `bash scripts/lint_all.sh`
 - When a linter fails, read the error message — it contains the fix
 - Keep PRs small and focused on a single spec item

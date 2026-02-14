@@ -2,78 +2,73 @@
 
 **Feature Spec**: `specs/features/[feature-name].md`
 **Created**: [YYYY-MM-DD]
-**Status**: [in-progress | completed | abandoned]
+**Status**: [draft | approved | in-progress | completed | abandoned]
+**Approved by**: [human name or "pending"]
+
+> **This plan requires human approval before implementation begins.**
+> No code is written until status changes from "draft" to "approved".
 
 ## Purpose
 
 What someone can do after this change that they could not do before.
-Frame in terms of user-visible outcomes, not internal implementation.
 
 ## Context and Orientation
 
 Current state of the codebase relevant to this task.
-Name files with full repository-relative paths. Define any non-obvious terminology.
+Name files with full repository-relative paths.
 
 ## Plan of Work
 
 Prose description of the approach. Why this approach over alternatives.
-Reference specific layers, modules, and functions by name.
 
-## Concrete Steps
+## Tasks
 
-Step-by-step instructions. Each step must be idempotent (safe to run multiple times).
-Include exact commands with expected output where applicable.
+Break the work into small, atomic tasks. Each task should take **2-5 minutes** for an agent to execute.
 
 ### Milestone 1: [Name]
 
-What this milestone achieves and what becomes usable after it.
+What this milestone achieves.
 
-- [ ] Step 1: [exact action with file paths]
-- [ ] Step 2: [exact action with file paths]
+#### Task 1.1: [Short description]
 
-**Verify**: [Observable acceptance — e.g., "running `pytest tests/unit/` shows 0 failures"]
+- **What**: [Exact action — e.g., "Create ExampleId refined type and ExampleStatus enum"]
+- **Where**: `src/types/example.py`
+- **Details**: [Complete description of the code to write, or the change to make]
+- **Verify**: `python -c "from src.types.example import ExampleId, ExampleStatus"` succeeds
+
+#### Task 1.2: [Short description]
+
+- **What**: [Exact action]
+- **Where**: [file path]
+- **Details**: [Complete description]
+- **Verify**: [command + expected output]
+
+**Milestone verification**: [Observable acceptance — e.g., "`pytest tests/unit/` shows 0 failures"]
 
 ### Milestone 2: [Name]
 
-- [ ] Step 1: ...
+#### Task 2.1: ...
 
-**Verify**: [Observable acceptance]
+**Milestone verification**: ...
 
 ## Progress
 
-Update with timestamps as work proceeds.
-
-- [ ] [YYYY-MM-DD HH:MM] Milestone 1 started
+- [ ] [YYYY-MM-DD HH:MM] Plan approved by human
 - [ ] [YYYY-MM-DD HH:MM] Milestone 1 completed
 
 ## Surprises & Discoveries
-
-Document unexpected behaviors, edge cases, or assumptions that proved wrong.
-Include evidence (error messages, test output).
 
 - [None yet]
 
 ## Decision Log
 
-Every decision made during implementation, with rationale.
-
 | Date | Decision | Rationale |
 |------|----------|-----------|
 | | | |
 
-## Outcomes & Retrospective
-
-Fill in at completion or at major milestones.
-
-**What worked**:
-**What didn't**:
-**Follow-up tasks**:
-
 ## Acceptance Criteria
 
 Observable, demonstrable behaviors that prove the work is complete.
-Not "code compiles" — instead, "starting the server and requesting GET /api/users returns HTTP 200 with a JSON array."
 
 1. [ ] [Observable behavior 1]
 2. [ ] [Observable behavior 2]
-3. [ ] [Observable behavior 3]
