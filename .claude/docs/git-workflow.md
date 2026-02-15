@@ -36,7 +36,7 @@ git fetch origin && git rebase origin/main
 
 ### 4. Review and merge
 
-After both reviews pass (spec-reviewer + code-reviewer):
+After the review passes:
 
 ```bash
 # Team projects: create a PR
@@ -45,19 +45,6 @@ gh pr create --title "feat: implement <spec-name>" --body "Spec: specs/features/
 # Solo projects: merge directly
 git checkout main && git merge --no-ff feature/<spec-name> && git branch -d feature/<spec-name>
 ```
-
-## Git Worktrees (for parallel features)
-
-When working on independent features simultaneously:
-
-```bash
-git worktree add ../project-feature-auth feature/auth
-cd ../project-feature-auth
-# ... implement ...
-git worktree remove ../project-feature-auth
-```
-
-Use worktrees when features are independent. Use sequential branches when features depend on each other.
 
 ## Commit Message Convention
 

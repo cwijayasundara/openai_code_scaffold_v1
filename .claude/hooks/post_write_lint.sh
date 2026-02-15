@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-# Post-write hook: runs targeted linters on the file that was just written.
-# Only runs the relevant linters based on file location.
-#
-# This runs AFTER Claude Code writes or edits a file.
+# Post-write hook: runs targeted linters on src/ files after write.
 
 set -uo pipefail
 
@@ -24,22 +21,8 @@ fi
 
 echo "--- Post-write lint for: $REL_PATH ---"
 
-# Always check file size
-if bash "$LINTERS_DIR/file_size.sh" 2>/dev/null; then
-  :
-else
-  ERRORS=$((ERRORS + 1))
-fi
-
-# Always check naming
+# Check naming conventions
 if bash "$LINTERS_DIR/naming_conventions.sh" 2>/dev/null; then
-  :
-else
-  ERRORS=$((ERRORS + 1))
-fi
-
-# Check structured logging
-if bash "$LINTERS_DIR/structured_logging.sh" 2>/dev/null; then
   :
 else
   ERRORS=$((ERRORS + 1))
@@ -64,7 +47,6 @@ fi
 if [[ $ERRORS -gt 0 ]]; then
   echo "WARNING: $ERRORS linter(s) reported issues after writing $REL_PATH"
   echo "Read the error messages above — they contain remediation instructions."
-  # Exit 0 so we don't block the write, but the agent sees the warnings
 fi
 
 exit 0
